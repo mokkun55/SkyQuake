@@ -1,13 +1,15 @@
-// 天気データを受け取る
 
-let weather;
+// --初期設定--
+fetchWeatherData();
 
-fetch('/weather')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data.weather);
-    console.log(data.chanceOfRains);
-    console.log(data.img_url);
+pref = "30"; //県ID 大阪30, 三重27
+set_rein_radarURL(pref);
+
+// ---天気データ取得関数---
+async function fetchWeatherData() { 
+  try {
+    const response = await fetch('/weather');
+    const data = await response.json();
     weather = data.weather;
 
     const today_weather = document.getElementById("today");
@@ -35,19 +37,13 @@ fetch('/weather')
     rain_radar_city.innerHTML = `
     <img src="${rain_radar_city_URL}" alt="レーダー画像">
     `;
+  } catch (error) {
+    console.error('データの取得中にエラーが発生しました:', error);
+  }
+}
 
-  })
-  .catch(error => console.error('データの取得中にエラーが発生しました:', error));
 
-pref = "30"; //県ID
-
-// str で渡す
-let year;
-let month ;
-let day ;
-let hour ;
-let min ;
-
+// ---時間取得 + α---
 function nowtime(){
     let date = new Date();
     year = date.getFullYear(); 
@@ -56,18 +52,17 @@ function nowtime(){
     hour = add_zero(date.getHours());
     min = add_zero(Math.floor(date.getMinutes() / 10) * 10 ) ;
 
-      //10分のときの処理
+      // 10分のときの処理
     if (parseInt(min) <= 10) {
       hour = add_zero(hour - 1);
-      min = "00";
+      min = "50";
     } else {
       min = min - 10;
     }
 
-    console.log(year, month, day, hour, min)
+    // console.log(year, month, day, hour, min)
 }
-
-function add_zero(num){ // ゼロ補完
+function add_zero(num){ // ゼロ補完 時間に適応させる
     numStr = num.toString();
     if(numStr.length === 1){
       return `0${numStr}`;
@@ -77,11 +72,24 @@ function add_zero(num){ // ゼロ補完
   }
 
 
-nowtime();
+// --雨雲レーダーURL取得関数--
+function set_rein_radarURL(pref){
+  nowtime();
+  rain_radar_city_URL = `https://static.tenki.jp/static-images/radar/${year}/${month}/${day}/${hour}/${min}/00/pref-${pref}-large.jpg`
+  // console.log(rain_radar_city_URL);
+}
+
+
+// --定期実行(1分)--
+setInterval(() => { 
+
+  // 雨雲レーダー画像更新
+  set_rein_radarURL();
+  rain_radar_city.innerHTML = `
+  <img src="${rain_radar_city_URL}" alt="レーダー画像">
+  `;
 
 
 
-
-console.log(year, month, day, hour, min)
-rain_radar_city_URL = `https://static.tenki.jp/static-images/radar/${year}/${month}/${day}/${hour}/${min}/00/pref-${pref}-large.jpg`
-console.log(rain_radar_city_URL)
+  console.log("定期実行")
+},60000);
