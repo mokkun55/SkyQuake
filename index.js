@@ -34,7 +34,7 @@ const options = {
 request(options, (err, res, body) => {
     // console.log(body.forecasts[1].chanceOfRain)
 
-    day = 1;
+    // day = 1;
 
     // 天気
 

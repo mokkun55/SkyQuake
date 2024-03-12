@@ -51,10 +51,18 @@ let min ;
 function nowtime(){
     let date = new Date();
     year = date.getFullYear(); 
-    month = add_zero(date.getMonth());
+    month = add_zero(date.getMonth() + 1); 
     day = add_zero(date.getDate());
     hour = add_zero(date.getHours());
-    min = add_zero(Math.floor(date.getMinutes() / 10));
+    min = add_zero(Math.floor(date.getMinutes() / 10) * 10 ) ;
+
+      //10分のときの処理
+    if (parseInt(min) <= 10) {
+      hour = add_zero(hour - 1);
+      min = "00";
+    } else {
+      min = min - 10;
+    }
 
     console.log(year, month, day, hour, min)
 }
@@ -70,13 +78,10 @@ function add_zero(num){ // ゼロ補完
 
 
 nowtime();
-// if (parseInt(min) <= 10) {
-//     hour = add_zero(hour - 1);
-//     min = "00";
-// } else {
-//     min = min - 10;
-// }
+
+
+
 
 console.log(year, month, day, hour, min)
 rain_radar_city_URL = `https://static.tenki.jp/static-images/radar/${year}/${month}/${day}/${hour}/${min}/00/pref-${pref}-large.jpg`
-// console.log(rain_radar_city_URL)
+console.log(rain_radar_city_URL)
