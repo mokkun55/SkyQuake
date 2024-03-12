@@ -20,7 +20,15 @@ app.get('/', (req, res) => {
 
 // /weatherでアクセスが来たとき天気情報を返す
 app.get('/weather', (req, res) => {
-    res.send({ weather: weather, chanceOfRains: chanceOfRains, img_url: img_url });
+    res.send({ 
+        weather: weather,
+        chanceOfRains: chanceOfRains,
+        MINtemps: MINtemps,
+        MAXtemps: MAXtemps,
+        windInfo: windInfo,
+        waveInfo: waveInfo,
+        img_url: img_url
+    });
 });
 
 // --お天気API--
@@ -32,10 +40,7 @@ const options = {
 };
 
 request(options, (err, res, body) => {
-    // console.log(body.forecasts[1].chanceOfRain)
-
-    // day = 1;
-
+    // console.log(body.forecasts[0].detail.wind);
     // 天気
 
     weather = []
@@ -57,6 +62,28 @@ request(options, (err, res, body) => {
     }
 
     // console.log(chanceOfRains)
+
+    MAXtemps = [] // 最高温度
+    for (let i = 0; i < 3; i++) {
+        MAXtemps.push(body.forecasts[i].temperature.max.celsius)
+    }
+
+    MINtemps = [] // 最低温度
+    for (let i = 0; i < 3; i++) {
+        MINtemps.push(body.forecasts[i].temperature.min.celsius)
+    }
+
+    windInfo = [] // 風情報
+    for (let i = 0; i < 3; i++) {
+        windInfo.push(body.forecasts[i].detail.wind)
+    }
+    
+    waveInfo = [] // 波情報
+    for (let i = 0; i < 3; i++) {
+        waveInfo.push(body.forecasts[i].detail.wave)
+    }
+
+    // console.log(windInfo,waveInfo)
 
     img_url = []
     for (let i = 0; i < 3; i++) {
