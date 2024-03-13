@@ -1,14 +1,8 @@
 
 // --初期設定--
 fetchWeatherData();
-
 pref = "30"; //県ID 大阪30, 三重27
 set_rein_radarURL(pref);
-
-  // -傘-
-  document.getElementById('today_umbrella').style.display = "none";
-  document.getElementById('tomorrow_umbrella').style.display = "none";
-  document.getElementById('after_tomorrow_umbrella').style.display = "none";
 
 
 // ---天気データ取得+html関数---
@@ -30,6 +24,7 @@ async function fetchWeatherData() {
     document.getElementById('today_windinfo').innerHTML = "🍃" + clearSpace(data.windInfo[i]);
     // document.getElementById('today_waveinfo').innerHTML = clearSpace(data.waveInfo[i]); いまは使わないかなぁ
 
+
     // -現在時刻を赤くする-
     let date = new Date();
     let hour = date.getHours();
@@ -46,6 +41,8 @@ async function fetchWeatherData() {
     // now_chanceOfRain.style.backgroundColor = "gray";
     // now_chanceOfRain.style.fontWeight == "bold";
 
+    Bringunbrella('today', data.chanceOfRains[i]); // 傘判定
+
 
     i++;
     document.getElementById('tomorrow_weather').innerHTML = data.weather[i];
@@ -58,6 +55,8 @@ async function fetchWeatherData() {
     document.getElementById('tomorrow_mintemp').innerHTML = "最低" + data.MINtemps[i] + "℃";
     document.getElementById('tomorrow_windinfo').innerHTML = "🍃" + clearSpace(data.windInfo[i]);
     // document.getElementById('today_waveinfo').innerHTML = clearSpace(data.waveInfo[i]); いまは使わないかなぁ
+
+    Bringunbrella('tomorrow', data.chanceOfRains[i]); // 傘判定
 
 
     i++;
@@ -72,14 +71,9 @@ async function fetchWeatherData() {
     document.getElementById('after_tomorrow_windinfo').innerHTML = "🍃" + clearSpace(data.windInfo[i]);
     // document.getElementById('today_waveinfo').innerHTML = clearSpace(data.waveInfo[i]); いまは使わないかなぁ
 
+    Bringunbrella('after_tomorrow', data.chanceOfRains[i]); // 傘判定
+
     
-    // --傘必要判定--
-    // document.getElementById('today_umbrella').style.display = "none";
-    // document.getElementById('tomorrow_umbrella').style.display = "none";
-    // document.getElementById('after_tomorrow_umbrella').style.display = "none";
-
-
-
 
 
     // --レーダー画像--
@@ -175,6 +169,34 @@ function getDate(day) {
   return String(month) + " / " + String(day) + String(get_youbi(youbi));
 }
 
+// --傘判定関数--
+function Bringunbrella(day, data) {
+  let NEED = false;
+  let parsent = 50; // x%以上で通知する
+
+  // console.log(data);
+  let datas = [];
+  for (let i = 0; i < data.length; i++) {
+    let ob = data[i];
+    res = ob.replace("%", "");
+    datas.push(Number(res));
+  }
+
+  if (datas[0] >= parsent || datas[1] >= parsent ||datas[2] >= parsent || datas[3] >= parsent){
+    // console.log("雨ふるかも");
+    NEED = true;
+  }
+
+  if (NEED) { // 必要なとき
+    document.getElementById(`${day}_umbrella`).style.display = "block";
+    document.getElementById(`NO_${day}_umbrella`).style.display = "none";
+    } else { // 不要なとき
+    document.getElementById(`${day}_umbrella`).style.display = "none";
+    document.getElementById(`NO_${day}_umbrella`).style.display = "block";
+  }
+}
+
+
 // --定期実行(1分)--
 setInterval(() => { 
 
@@ -184,6 +206,7 @@ setInterval(() => {
   <img src="${rain_radar_city_URL}" alt="レーダー画像">
   `;
 
+  // 天気データ取得+書き込み
   fetchWeatherData();
 
   console.log("定期実行")
