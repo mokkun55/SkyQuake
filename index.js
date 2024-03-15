@@ -9,7 +9,7 @@ const dotenv = require('dotenv').config();
 //PORTを指定する
 const PORT = 3000;
 //expressを使い、ローカルサーバーを立ち上げる
-app.listen(PORT, () => console.log(`server is online at http://localhost:${PORT}`));
+app.listen(process.env.PORT || PORT, () => console.log(`server is online at http://localhost:${PORT}`));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
