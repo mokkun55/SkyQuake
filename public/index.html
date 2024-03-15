@@ -5,170 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>便利ボード</title>
+    <title>SkyQuake</title>
 </head>
 <body>
-    <div id="jQuake-yt">
-        <!-- ようつべライブ -->
-        <!-- <iframe width="692" height="390" src="https://www.youtube.com/embed/ExWAzLFCvWQ?si=BKbERUhsgsSapiFd&amp;controls=0&autoplay=1&mute=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen quality="highres"></iframe> -->
-    </div>
 
-    <div id="weather-api" >
-        <div id="today" class="container-fluid text-center ">
-            <table class="table table-bordered">
-                <tbody class="align-middle">
-                    <tr>
-                        <th id="today-date" style="width: 10%"></th>
-                        <th style="width: 20%">
-                            <img id="today_weather_pic" src="" alt="今日天気アイコン">
-                            <div id="today_weather">天気</div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="today_maxtemp" class="text-warning"></div>
-                            <div id="today_mintemp" class="text-primary"></div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="today_windinfo"></div>
-                            <!-- <div id="today_waveinfo"></div> -->
-                        </th>
-                        <th style="width: 20%">
-                            <div id="NO_today_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
-                                <p>傘はいりません</p>
-                            </div>
-                            <div id="today_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
-                                <p>傘が必要</p>
-                            </div>
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>雨(時)</th>
-                        <th>0-6時</th>
-                        <th>6-12時</th>
-                        <th>12-18時</th>
-                        <th>18-24時</th>
-                    </tr>
-                    
-                    <tr>
-                        <th>雨(%)</th>
-                        <th id="today_0_6">--%</th>
-                        <th id="today_6_12">--%</th>
-                        <th id="today_12_18">--%</th>
-                        <th id="today_18_24">--%</th>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div id="jQuake-yt">
+                    <!-- ようつべライブ -->
+                    <iframe width="692" height="390" src="https://www.youtube.com/embed/ExWAzLFCvWQ?si=BKbERUhsgsSapiFd&amp;controls=0&autoplay=1&mute=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen quality="highres"></iframe>
+                </div>
+            </div>
         </div>
 
 
+        <div class="row">
+            <div class="col text-center p-0" id="rain_radar_japan">
+                <img src="https://static.tenki.jp/static-images/radar/recent/japan-detail-large.jpg" alt="雨雲レーダー">
+            </div>
+            <div class="col text-center p-0" id="rain_radar_city">
 
-        <div id="tomorrow" class="container-fluid text-center ">
-            <table class="table table-bordered">
-                <tbody class="align-middle">
-                    <tr>
-                        <th id="tomorrow-date" style="width: 10%"></th>
-                        <th style="width: 20%">
-                            <img id="tomorrow_weather_pic" src="" alt="今日天気アイコン">
-                            <div id="tomorrow_weather">天気</div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="tomorrow_maxtemp" class="text-warning"></div>
-                            <div id="tomorrow_mintemp" class="text-primary"></div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="tomorrow_windinfo"></div>
-                            <!-- <div id="tomorrow_waveinfo"></div> -->
-                        </th>
-                        <th style="width: 20%">
-                            <div id="NO_tomorrow_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
-                                <p>傘はいりません</p>
-                            </div>
-                            <div id="tomorrow_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
-                                <p>傘が必要</p>
-                            </div>
+            </div>
+        </div>
+
+        <div class="row" id="weather-api">
+            <div id="today" class="container-fluid text-center ">
+                <table class="table table-bordered">
+                    <tbody class="align-middle">
+                        <tr>
+                            <th id="today-date" style="width: 10%"></th>
+                            <th style="width: 20%">
+                                <img id="today_weather_pic" src="" alt="今日天気アイコン">
+                                <div id="today_weather">天気</div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="today_maxtemp" class="text-warning"></div>
+                                <div id="today_mintemp" class="text-primary"></div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="today_windinfo"></div>
+                                <!-- <div id="today_waveinfo"></div> -->
+                            </th>
+                            <th style="width: 20%">
+                                <div id="NO_today_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
+                                    <p>傘はいりません</p>
+                                </div>
+                                <div id="today_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
+                                    <p>傘が必要</p>
+                                </div>
+                            </th>
                         </tr>
-                    </tr>
-
-                    <tr>
-                        <th>雨(時)</th>
-                        <th>0-6時</th>
-                        <th>6-12時</th>
-                        <th>12-18時</th>
-                        <th>18-24時</th>
-                    </tr>
-                    
-                    <tr>
-                        <th>雨(%)</th>
-                        <th id="tomorrow_0_6">--%</th>
-                        <th id="tomorrow_6_12">--%</th>
-                        <th id="tomorrow_12_18">--%</th>
-                        <th id="tomorrow_18_24">--%</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="after_tomorrow" class="container-fluid text-center ">
-            <table class="table table-bordered">
-                <tbody class="align-middle">
-                    <tr>
-                        <th id="after_tomorrow-date" style="width: 10%"></th>
-                        <th style="width: 20%">
-                            <img id="after_tomorrow_weather_pic" src="" alt="今日天気アイコン">
-                            <div id="after_tomorrow_weather">天気</div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="after_tomorrow_maxtemp" class="text-warning"></div>
-                            <div id="after_tomorrow_mintemp" class="text-primary"></div>
-                        </th>
-                        <th style="width: 20%">
-                            <div id="after_tomorrow_windinfo"></div>
-                            <!-- <div id="after_tomorrow_waveinfo"></div> -->
-                        </th>
-                        <th style="width: 20%">
-                            <div id="NO_after_tomorrow_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
-                                <p>傘はいりません</p>
-                            </div>
-                            <div id="after_tomorrow_umbrella">
-                                <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
-                                <p>傘が必要</p>
-                            </div>
-                        </tr>
-
-                    <tr>
-                        <th>雨(時)</th>
-                        <th>0-6時</th>
-                        <th>6-12時</th>
-                        <th>12-18時</th>
-                        <th>18-24時</th>
-                    </tr>
-                    
-                    <tr>
-                        <th>雨(%)</th>
-                        <th id="after_tomorrow_0_6">--%</th>
-                        <th id="after_tomorrow_6_12">--%</th>
-                        <th id="after_tomorrow_12_18">--%</th>
-                        <th id="after_tomorrow_18_24">--%</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="rain_radar_japan">
-            <img src="https://static.tenki.jp/static-images/radar/recent/japan-detail-large.jpg" alt="雨雲レーダー">
-        </div>
-
-        <div id="rain_radar_city">
-            
-        </div>
     
+                        <tr>
+                            <th>雨(時)</th>
+                            <th>0-6時</th>
+                            <th>6-12時</th>
+                            <th>12-18時</th>
+                            <th>18-24時</th>
+                        </tr>
+                        
+                        <tr>
+                            <th>雨(%)</th>
+                            <th id="today_0_6">--%</th>
+                            <th id="today_6_12">--%</th>
+                            <th id="today_12_18">--%</th>
+                            <th id="today_18_24">--%</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+    
+    
+            <div id="tomorrow" class="container-fluid text-center ">
+                <table class="table table-bordered">
+                    <tbody class="align-middle">
+                        <tr>
+                            <th id="tomorrow-date" style="width: 10%"></th>
+                            <th style="width: 20%">
+                                <img id="tomorrow_weather_pic" src="" alt="今日天気アイコン">
+                                <div id="tomorrow_weather">天気</div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="tomorrow_maxtemp" class="text-warning"></div>
+                                <div id="tomorrow_mintemp" class="text-primary"></div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="tomorrow_windinfo"></div>
+                                <!-- <div id="tomorrow_waveinfo"></div> -->
+                            </th>
+                            <th style="width: 20%">
+                                <div id="NO_tomorrow_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
+                                    <p>傘はいりません</p>
+                                </div>
+                                <div id="tomorrow_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
+                                    <p>傘が必要</p>
+                                </div>
+                            </tr>
+                        </tr>
+    
+                        <tr>
+                            <th>雨(時)</th>
+                            <th>0-6時</th>
+                            <th>6-12時</th>
+                            <th>12-18時</th>
+                            <th>18-24時</th>
+                        </tr>
+                        
+                        <tr>
+                            <th>雨(%)</th>
+                            <th id="tomorrow_0_6">--%</th>
+                            <th id="tomorrow_6_12">--%</th>
+                            <th id="tomorrow_12_18">--%</th>
+                            <th id="tomorrow_18_24">--%</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+            <div id="after_tomorrow" class="container-fluid text-center ">
+                <table class="table table-bordered">
+                    <tbody class="align-middle">
+                        <tr>
+                            <th id="after_tomorrow-date" style="width: 10%"></th>
+                            <th style="width: 20%">
+                                <img id="after_tomorrow_weather_pic" src="" alt="今日天気アイコン">
+                                <div id="after_tomorrow_weather">天気</div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="after_tomorrow_maxtemp" class="text-warning"></div>
+                                <div id="after_tomorrow_mintemp" class="text-primary"></div>
+                            </th>
+                            <th style="width: 20%">
+                                <div id="after_tomorrow_windinfo"></div>
+                                <!-- <div id="after_tomorrow_waveinfo"></div> -->
+                            </th>
+                            <th style="width: 20%">
+                                <div id="NO_after_tomorrow_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/100.svg" alt="晴れマーク">
+                                    <p>傘はいりません</p>
+                                </div>
+                                <div id="after_tomorrow_umbrella">
+                                    <img src="https://www.jma.go.jp/bosai/forecast/img/300.svg" alt="傘マーク">
+                                    <p>傘が必要</p>
+                                </div>
+                            </tr>
+    
+                        <tr>
+                            <th>雨(時)</th>
+                            <th>0-6時</th>
+                            <th>6-12時</th>
+                            <th>12-18時</th>
+                            <th>18-24時</th>
+                        </tr>
+                        
+                        <tr>
+                            <th>雨(%)</th>
+                            <th id="after_tomorrow_0_6">--%</th>
+                            <th id="after_tomorrow_6_12">--%</th>
+                            <th id="after_tomorrow_12_18">--%</th>
+                            <th id="after_tomorrow_18_24">--%</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    
+    
+    <footer>
+        <p>(C) 天気予報 API（livedoor 天気互換）</p>
+        <a href="https://weather.tsukumijima.net/">https://weather.tsukumijima.net</a>
+    </footer>
+
+        <!-- script読み込み -->
         <script src="script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
+
+
 </html>

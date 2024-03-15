@@ -137,7 +137,6 @@ function clearSpace(txt){
 function set_rein_radarURL(pref){
   nowtime();
   rain_radar_city_URL = `https://static.tenki.jp/static-images/radar/${year}/${month}/${day}/${hour}/${min}/00/pref-${pref}-large.jpg`
-  // console.log(rain_radar_city_URL);
 }
 
 function get_youbi(date){

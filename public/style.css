@@ -1,3 +1,18 @@
 #today-date, #tomorrow-date, #after_tomorrow-date{
     font-size: 20px;
 }
+
+img {
+    max-width: 100%; /*この記述で画面幅の100%の幅で画像を表示する*/
+    height: auto; /*高さはautoで画像の最適化表示*/
+}
+
+iframe {
+    width: 100%;
+    height: calc(100vw * 0.5625); /* 16:9のアスペクト比を保持する場合 */
+    max-height: 100%; /* 必要に応じて、高さが画面より大きくならないように制限します */
+  }
+
+footer {
+    text-align: right;
+}
