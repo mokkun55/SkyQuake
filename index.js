@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 // /weatherでアクセスが来たとき天気情報を返す
 app.get('/weather', (req, res) => {
+    console.log("/weather")
     res.send({ 
         weather: weather,
         chanceOfRains: chanceOfRains,
