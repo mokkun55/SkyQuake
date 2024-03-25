@@ -28,14 +28,15 @@ app.get('/weather', (req, res) => {
         MAXtemps: MAXtemps,
         windInfo: windInfo,
         waveInfo: waveInfo,
-        img_url: img_url
+        img_url: img_url,
     });
 });
 
 // --お天気API--
 const options = {
     // 27000はシティID
-    url: `https://weather.tsukumijima.net/api/forecast?city=270000`,
+    // 27000:osaka 240010:mie,tu
+    url: `https://weather.tsukumijima.net/api/forecast?city=240010`,
     method: "GET",
     json: true,
 };

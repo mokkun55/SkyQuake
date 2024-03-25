@@ -1,7 +1,7 @@
 
 // --初期設定--
 fetchWeatherData();
-pref = "30"; //県ID 大阪30, 三重27
+pref = "27"; //県ID 大阪30, 三重27
 set_rein_radarURL(pref);
 
 
@@ -11,6 +11,7 @@ async function fetchWeatherData() {
     const response = await fetch('/weather');
     const data = await response.json();
     weather = data.weather;
+    console.log(weather);
 
     let i = 0;
     document.getElementById('today_weather').innerHTML = data.weather[i];
